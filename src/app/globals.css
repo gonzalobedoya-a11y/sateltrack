@@ -1,0 +1,138 @@
+/* Fuentes Google - DEBEN IR PRIMERO */
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "Geist", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-display: "Rajdhani", system-ui, sans-serif;
+}
+
+* {
+  border-color: theme("colors.border.DEFAULT");
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: theme("colors.bg.DEFAULT");
+  color: theme("colors.text.DEFAULT");
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar custom */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: theme("colors.bg.DEFAULT");
+}
+::-webkit-scrollbar-thumb {
+  background: theme("colors.border.strong");
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: theme("colors.brand.red-dim");
+}
+
+/* Animación de barrido tipo radar */
+@keyframes radar-sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.radar-sweep {
+  animation: radar-sweep 4s linear infinite;
+}
+
+/* Glow rojo para elementos destacados */
+.glow-red {
+  box-shadow: 0 0 24px rgba(220, 38, 38, 0.3);
+}
+
+.text-glow-red {
+  text-shadow: 0 0 12px rgba(220, 38, 38, 0.5);
+}
+
+/* Borde escaneo animado para tarjetas hover */
+.scan-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-border::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    theme("colors.brand.red"),
+    transparent
+  );
+  animation: scan-line 3s ease-in-out infinite;
+}
+
+@keyframes scan-line {
+  0%, 100% { left: -100%; }
+  50% { left: 100%; }
+}
+
+/* LED indicators */
+.led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.led-active {
+  background: theme("colors.status.active");
+  box-shadow: 0 0 8px theme("colors.status.active");
+}
+
+.led-warning {
+  background: theme("colors.status.warning");
+  box-shadow: 0 0 8px theme("colors.status.warning");
+}
+
+.led-danger {
+  background: theme("colors.status.danger");
+  box-shadow: 0 0 8px theme("colors.status.danger");
+  animation: led-pulse 1.5s ease-in-out infinite;
+}
+
+.led-inactive {
+  background: theme("colors.status.inactive");
+}
+
+@keyframes led-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Texto con tracking espaciado para títulos técnicos */
+.tracking-cmd {
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-feature-settings: "tnum";
+}
+
+/* Focus ring */
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 2px solid theme("colors.brand.red");
+  outline-offset: 2px;
+}
